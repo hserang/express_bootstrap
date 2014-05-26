@@ -11,9 +11,9 @@ module.exports = function(grunt) {
     requirejs: {
       compile: {
         options: {
-          baseUrl: 'app/',
+          baseUrl: 'app/assets',
           include: ['libs/requirejs/require', 'scripts/main'],
-          mainConfigFile: 'app/scripts/main.js',
+          mainConfigFile: 'app/assets/scripts/main.js',
           name: 'scripts/app',
           optimize: 'none',
           out: 'public/javascripts/app.js'
@@ -25,16 +25,24 @@ module.exports = function(grunt) {
     },
     mocha: {
       test: {
-        src: ['tests/testrunner.html'],
+        src: ['tests/client/testrunner.html'],
         options: {
           run: true
         }
       }
     },
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec'
+        },
+        src: ['tests/server/**/*.js']
+      }
+    },
     watch: {
       scripts: {
-        files: ['app/scripts/**/*.js', 'Gruntfile.js', 'app/**/*.html'],
-        tasks: ['requirejs'],
+        files: ['app/assets/scripts/**/*.js', 'Gruntfile.js', 'tests/**/*.js'],
+        tasks: ['requirejs', 'mocha', 'mochaTest'],
         options: {
           livereload: {
             port: 35729,
@@ -47,7 +55,8 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('default', ['requirejs', 'watch']);
-  grunt.registerTask('test', ['mocha']);
+  //grunt.registerTask('test', ['mocha:client', 'mocha:server']);
+  grunt.registerTask('test', ['mochaTest', 'mocha']);
 
   //not working yet
   grunt.registerTask('jshint', ['jshint']);
