@@ -8,6 +8,16 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
+    sass: {
+      dist: {
+        options: {
+          style: 'expanded'
+        },
+        files: {
+          'public/styles/app.css': 'app/assets/styles/app.scss'
+        }
+      }
+    },
     requirejs: {
       compile: {
         options: {
@@ -40,6 +50,13 @@ module.exports = function(grunt) {
       }
     },
     watch: {
+      css: {
+        files: ['app/assets/styles/**/*.scss'],
+        tasks: ['sass'],
+        options: {
+          spawn: false
+        }
+      },
       scripts: {
         files: ['app/assets/scripts/**/*.js', 'Gruntfile.js', 'tests/**/*.js'],
         tasks: ['requirejs', 'mocha', 'mochaTest'],
