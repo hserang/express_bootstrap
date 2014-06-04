@@ -1,4 +1,5 @@
-var express = require('express'),
+var config = require('config/config'),
+    express = require('express'),
     app = express(),
     path = require('path'),
     favicon = require('static-favicon'),
