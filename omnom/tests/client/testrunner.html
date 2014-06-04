@@ -3,21 +3,7 @@
     <meta charset="utf-8">
     <title>Mocha Tests</title>
     <link rel="stylesheet" href="../../node_modules/mocha/mocha.css">
-    <script src="../../node_modules/mocha/mocha.js"></script>
-    <script src="../../node_modules/chai/chai.js"></script>
-    <script src="../../node_modules/sinon/pkg/sinon.js"></script>
-    <script>
-
-      //setup
-      var expect = chai.expect;
-
-      mocha.setup('bdd');
-      mocha.reporter('html');
-      window.onload = function() {
-        (window.mochaPhantomJS || mocha).run();
-      };
-    </script>
-    <script src="js/spec/hello.spec.js"></script>
+    <script data-main="testrunner.js" src="../../app/assets/libs/requirejs/require.js"></script>
   </head>
   <body>
     <div id=mocha></div>
